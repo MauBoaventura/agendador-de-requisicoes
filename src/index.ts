@@ -4,13 +4,13 @@ import axios from 'axios';
 const funcionarioId: number = 47;
 const authorization: string = "Basic RjExOjEyMzQ1Ng==";
 
-cron.schedule('0 8,12,14,18 * * 1-5', async () => {
-  try {
-    await realizarRequisicao();
-  } catch (error) {
-    console.error('Erro na requisição:');
-  }
-});
+// cron.schedule('0 8,12,14,18 * * 1-5', async () => {
+//   try {
+//     await realizarRequisicao();
+//   } catch (error) {
+//     console.error('Erro na requisição:');
+//   }
+// });
 
 cron.schedule('1 8,18 * * 1,2,4', async () => {
   try {
