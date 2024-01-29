@@ -4,7 +4,7 @@ import axios from 'axios';
 const funcionarioId: number = 47;
 const authorization: string = "Basic RjExOjEyMzQ1Ng==";
 
-cron.schedule('1 8,12,14,18 * * 1-5', async () => {
+cron.schedule('0 8,12,14,18 * * 1-5', async () => {
   try {
     await realizarRequisicao();
   } catch (error) {
@@ -12,8 +12,47 @@ cron.schedule('1 8,12,14,18 * * 1-5', async () => {
   }
 });
 
+cron.schedule('1 8,18 * * 1,2,4', async () => {
+  try {
+    await realizarRequisicao();
+  } catch (error) {
+    console.error('Erro na requisição:');
+  }
+});
+cron.schedule('0 12,14 * * 1,2,4', async () => {
+  try {
+    await realizarRequisicao();
+  } catch (error) {
+    console.error('Erro na requisição:');
+  }
+});
+
+cron.schedule('3 8,12 * * 3,5', async () => {
+  try {
+    await realizarRequisicao();
+  } catch (error) {
+    console.error('Erro na requisição:');
+  }
+});
+
+cron.schedule('2 14,18 * * 3,5', async () => {
+  try {
+    await realizarRequisicao();
+  } catch (error) {
+    console.error('Erro na requisição:');
+  }
+});
+
+// cron.schedule('0 8,12,14,18 * * 1-5', async () => {
+//   try {
+//     await realizarRequisicao();
+//   } catch (error) {
+//     console.error('Erro na requisição:');
+//   }
+// });
+
 // Adicionando agendamento para os sábados
-cron.schedule('1 8,12 * * 6', async () => {
+cron.schedule('0 8,12 * * 6', async () => {
   try {
     await realizarRequisicao();
   } catch (error) {
