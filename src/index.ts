@@ -12,7 +12,7 @@ const authorization: string = "Basic RjExOjEyMzQ1Ng==";
 //   }
 // });
 
-cron.schedule('1 8,18 * * 1,2,4', async () => {
+cron.schedule('0 8,18 * * 1,2,4', async () => {
   try {
     await realizarRequisicao();
   } catch (error) {
@@ -27,7 +27,7 @@ cron.schedule('0 12,14 * * 1,2,4', async () => {
   }
 });
 
-cron.schedule('3 8,12 * * 3,5', async () => {
+cron.schedule('0 8,12 * * 3,5', async () => {
   try {
     await realizarRequisicao();
   } catch (error) {
@@ -35,7 +35,7 @@ cron.schedule('3 8,12 * * 3,5', async () => {
   }
 });
 
-cron.schedule('2 14,18 * * 3,5', async () => {
+cron.schedule('1 14,18 * * 3,5', async () => {
   try {
     await realizarRequisicao();
   } catch (error) {
