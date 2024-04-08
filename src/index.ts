@@ -4,30 +4,88 @@ import cron from "node-cron";
 const funcionarioId: number = 188;
 const authorization: string = "Basic OUE2OklORkFURUNAMjAyNDow";
 
-cron.schedule("0 8,12 * * 1,2,4", async () => {
-  try {
-    await realizarRequisicao();
-  } catch (error) {
-    console.error("Erro na requisição:");
-  }
-});
+const fs = require("fs");
+const schedules = fs.readFileSync("data/schedules.json", "utf8");
 
-cron.schedule("0 8,12 * * 3,5", async () => {
-  try {
-    await realizarRequisicao();
-  } catch (error) {
-    console.error("Erro na requisição:");
+const schedules_json = JSON.parse(schedules);
+
+const odd_days_schedules = schedules_json["odd_days"];
+const even_days_schedules = schedules_json["even_days"];
+const schedules_saturday = schedules_json["saturdays"];
+
+const odd_schedule_choose =
+  odd_days_schedules[Math.floor(Math.random() * odd_days_schedules.length)];
+const even_schedule_choose =
+  even_days_schedules[Math.floor(Math.random() * even_days_schedules.length)];
+const schedule_saturday_choose =
+  schedules_saturday[Math.floor(Math.random() * schedules_saturday.length)];
+
+cron.schedule(
+  `${odd_schedule_choose.ini.minute} ${odd_schedule_choose.ini.hour} * * 3,5`,
+  async () => {
+    try {
+      await realizarRequisicao();
+    } catch (error) {
+      console.error("Erro na requisição:");
+    }
   }
-});
+);
+
+cron.schedule(
+  `${odd_schedule_choose.end.minute} ${odd_schedule_choose.end.hour} * * 3,5`,
+  async () => {
+    try {
+      await realizarRequisicao();
+    } catch (error) {
+      console.error("Erro na requisição:");
+    }
+  }
+);
+
+cron.schedule(
+  `${even_schedule_choose.ini.minute} ${even_schedule_choose.ini.hour} * * 2,4`,
+  async () => {
+    try {
+      await realizarRequisicao();
+    } catch (error) {
+      console.error("Erro na requisição:");
+    }
+  }
+);
+
+cron.schedule(
+  `${even_schedule_choose.end.minute} ${even_schedule_choose.end.hour} * * 2,4`,
+  async () => {
+    try {
+      await realizarRequisicao();
+    } catch (error) {
+      console.error("Erro na requisição:");
+    }
+  }
+);
 
 // Adicionando agendamento para os sábados
-cron.schedule("0 8,12 * * 6", async () => {
-  try {
-    await realizarRequisicao();
-  } catch (error) {
-    console.error("Erro na requisição:");
+cron.schedule(
+  `${schedule_saturday_choose.ini.minute} ${schedule_saturday_choose.ini.hour} * * 6`,
+  async () => {
+    try {
+      await realizarRequisicao();
+    } catch (error) {
+      console.error("Erro na requisição:");
+    }
   }
-});
+);
+
+cron.schedule(
+  `${schedule_saturday_choose.end.minute} ${schedule_saturday_choose.end.hour} * * 6`,
+  async () => {
+    try {
+      await realizarRequisicao();
+    } catch (error) {
+      console.error("Erro na requisição:");
+    }
+  }
+);
 
 async function realizarRequisicao(): Promise<void> {
   const requestBody = {
