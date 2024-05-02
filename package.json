@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "start": "pm2 start src/index.ts --interpreter ts-node --name pontoAmarildo",
     "build": "tsc"
   },
   "keywords": [],
