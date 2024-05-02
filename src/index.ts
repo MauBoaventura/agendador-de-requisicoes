@@ -7,17 +7,25 @@ const authorization = "Basic NjU0OkNhc3NpMzIx";
 
 cron.schedule('0 0 * * *', () => {
   // Clear all tasks
-  for (const [_,task] of cron.getTasks()) {
-    task.stop()
+  for (const [name,task] of cron.getTasks()) {
+    if (name === 'ponto') {
+      task.stop()
+    }
   }
 
-  cron.schedule(`${randomTime()} 8,12 * * 1-6`, async () => {
-    try {
-      await realizarRequisicao();
-    } catch (error) {
-      console.error('Erro na requisição:');
+  cron.schedule(`${randomTime()} 8,12 * * 1-6`, 
+    async () => {
+      try {
+        await realizarRequisicao();
+      } catch (error) {
+        console.error('Erro na requisição:');
+      }
+    }, {
+      name: 'ponto',
     }
-  });
+  );
+}, {
+  runOnInit: true
 })
 
 
