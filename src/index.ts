@@ -1,69 +1,29 @@
 import cron from 'node-cron';
 import axios from 'axios';
+import { randomTime } from './random-time'
 
-const funcionarioId: number = 47;
-const authorization: string = "Basic RjExOjEyMzQ1Ng==";
+const funcionarioId = 186;
+const authorization = "Basic NjU0OkNhc3NpMzIx";
 
-// cron.schedule('0 8,12,14,18 * * 1-5', async () => {
-//   try {
-//     await realizarRequisicao();
-//   } catch (error) {
-//     console.error('Erro na requisição:');
-//   }
-// });
-
-cron.schedule('0 8,18 * * 1,2,4', async () => {
-  try {
-    await realizarRequisicao();
-  } catch (error) {
-    console.error('Erro na requisição:');
+cron.schedule('0 0 * * *', () => {
+  // Clear all tasks
+  for (const [_,task] of cron.getTasks()) {
+    task.stop()
   }
-});
-cron.schedule('0 12,14 * * 1,2,4', async () => {
-  try {
-    await realizarRequisicao();
-  } catch (error) {
-    console.error('Erro na requisição:');
-  }
-});
 
-cron.schedule('0 8,12 * * 3,5', async () => {
-  try {
-    await realizarRequisicao();
-  } catch (error) {
-    console.error('Erro na requisição:');
-  }
-});
-
-cron.schedule('1 14,18 * * 3,5', async () => {
-  try {
-    await realizarRequisicao();
-  } catch (error) {
-    console.error('Erro na requisição:');
-  }
-});
-
-// cron.schedule('0 8,12,14,18 * * 1-5', async () => {
-//   try {
-//     await realizarRequisicao();
-//   } catch (error) {
-//     console.error('Erro na requisição:');
-//   }
-// });
-
-// Adicionando agendamento para os sábados
-cron.schedule('0 8,12 * * 6', async () => {
-  try {
-    await realizarRequisicao();
-  } catch (error) {
-    console.error('Erro na requisição:');
-  }
-});
+  cron.schedule(`${randomTime()} 8,12 * * 1-6`, async () => {
+    try {
+      await realizarRequisicao();
+    } catch (error) {
+      console.error('Erro na requisição:');
+    }
+  });
+})
 
 
 async function realizarRequisicao(): Promise<void> {
   const requestBody = {
-    justificativa: "Registro de ponto",
+    justificativa: "Resgistrando ponto",
     latitude: -5.0888704,
     longitude: -42.8048384,
     precisao: 3342.836687001363,
@@ -79,7 +39,7 @@ async function realizarRequisicao(): Promise<void> {
   };
 
   const queryParams = {
-    funcionarioId: funcionarioId
+    funcionarioId,
   };
 
   try {

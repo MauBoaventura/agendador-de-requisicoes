@@ -4,20 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
     "build": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^20.11.4",
     "axios": "^1.6.5",
     "node-cron": "^3.0.3",
-    "ts-node": "^10.9.2",
+    "tsx": "^4.8.2",
     "typescript": "^5.3.3"
   },
   "devDependencies": {
+    "@types/node": "^20.11.4",
     "@types/node-cron": "^3.0.11"
   }
 }
