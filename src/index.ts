@@ -52,13 +52,13 @@ cron.schedule('0 8,12 * * 1-6', async () => {
 // });
 
 // Adicionando agendamento para os sábados
-cron.schedule("0 8,12 * * 6", async () => {
-  try {
-    await realizarRequisicao();
-  } catch (error) {
-    console.error("Erro na requisição:");
-  }
-});
+// cron.schedule("0 8,12 * * 6", async () => {
+//   try {
+//     await realizarRequisicao();
+//   } catch (error) {
+//     console.error("Erro na requisição:");
+//   }
+// });
 
 async function realizarRequisicao(): Promise<void> {
   const requestBody = {
